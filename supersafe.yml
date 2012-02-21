@@ -1,0 +1,16 @@
+flagpresets:
+    supersafe:
+        lava-fire: deny
+        enderman-grief: deny
+        ghast-fireball: deny
+        water-flow: deny
+        creeper-explosion: deny
+        tnt: deny
+        fire-spread: deny
+        lighter: deny
+        mob-spawning: deny
+        lava-flow: deny
+        pvp: deny
+        mob-damage: deny
+        entry: deny
+        entry-group: nonmembers

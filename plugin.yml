@@ -1,0 +1,39 @@
+name: WorldGuardFlagger
+author: Mtihc
+description: WorldGuard flag presets via /flagger set and /flagger clear
+main: com.mtihc.minecraft.worldguardflagger.WorldGuardFlaggerPlugin
+depend: [WorldGuard]
+softdepend: []
+version: 3.0
+commands:
+    flagger:
+        description: To get more info, type /flagger help
+        usage: /flagger <set | clear | flags | presets | help>
+permissions:
+    worldguardflagger.set:
+        description: Allows you to set any preset, to any region
+        default: op
+    worldguardflagger.set.owner:
+        description: Allows you to set any preset, to regions to own
+        default: op
+    worldguardflagger.set.member:
+        description: Allows you to set any preset, to regions you are member of
+        default: op
+    worldguardflagger.clear:
+        description: Allows you to clear all flags on any region
+        default: op
+    worldguardflagger.clear.owner:
+        description: Allows you to clear all flags on regions you own
+        default: op
+    worldguardflagger.clear.member:
+        description: Allows you to clear all flags on regions you are member of
+        default: op
+    worldguardflagger.flags:
+        description: Allows you to get info on flags of a preset
+        default: op
+    worldguardflagger.presets:
+        description: Allows you to get a list of presets
+        default: op
+    worldguardflagger.reload:
+        description: Allows you to reload the config
+        default: op
