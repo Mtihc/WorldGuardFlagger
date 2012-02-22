@@ -1,10 +1,10 @@
 name: WorldGuardFlagger
 author: Mtihc
 description: WorldGuard flag presets via /flagger set and /flagger clear
-main: com.mtihc.minecraft.worldguardflagger.WorldGuardFlaggerPlugin
+main: com.mtihc.minecraft.worldguardflagger.WorldGuardFlagger
 depend: [WorldGuard]
 softdepend: []
-version: 3.0
+version: 3.1
 commands:
     flagger:
         description: To get more info, type /flagger help
