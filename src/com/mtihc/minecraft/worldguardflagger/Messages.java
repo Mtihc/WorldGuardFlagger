@@ -1,12 +1,7 @@
 package com.mtihc.minecraft.worldguardflagger;
 
-import java.util.logging.Logger;
-
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import com.sk89q.minecraft.util.commands.CommandException;
 
 public class Messages {
 
@@ -16,69 +11,22 @@ public class Messages {
 	public static final ChatColor CHAT_COLOR_B = ChatColor.GRAY;
 	public static final ChatColor CHAT_COLOR_DARK = ChatColor.DARK_GRAY;
 	
-	private Logger logger;
-
-	
 	
 	/**
 	 * Constructor.
 	 */
-	public Messages(JavaPlugin plugin) {
-		logger = plugin.getLogger();
+	public Messages() {
+		
 	}
 	
-	// --------------------------------------------------------------
-	// Console messages
-	// --------------------------------------------------------------
-
-	/**
-	 * Convenience method for prefixing every log with the plugin name.
-	 * 
-	 * @param msg
-	 *            The message to output to console.
-	 */
-	public void log(String msg) {
-		logger.info(msg);
-	}
-
-	/**
-	 * Convenience method for prefixing every severe fault with the plugin name.
-	 * 
-	 * @param msg
-	 *            The message to output to console.
-	 */
-	public void severe(String msg) {
-		logger.severe(msg);
-	}
-
-	/**
-	 * Convenience method for prefixing every warning with the plugin name.
-	 * 
-	 * @param msg
-	 *            The message to output to console
-	 */
-	public void warning(String msg) {
-		logger.warning(msg);
-	}
-
-	/**
-	 * Convenience method for prefixing every debug output with the plugin name.
-	 * 
-	 * @param msg
-	 *            The message to output to console
-	 */
-	public void debug(Object msg) {
-		logger.info(" [DEBUG]: " + msg.toString());
-	}
-
 	// --------------------------------------------------------------
 	// Chat messages
 	// --------------------------------------------------------------
 
 	/**
-	 * 
-	 * @param sender
-	 * @param expected
+	 * Incorrect number of arguments
+	 * @param sender Command sender
+	 * @param expected expected arguments
 	 */
 	public void incorrectNumberOfArguments(CommandSender sender, String expected) {
 		String message = CHAT_COLOR_ERROR
@@ -87,10 +35,10 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param regionName
-	 * @param worldName
+	 * Region does not exist
+	 * @param sender Command sender
+	 * @param regionName Region that doesn't exist
+	 * @param worldName The world that was checked
 	 */
 	public void regionDoesNotExist(CommandSender sender, String regionName,
 			String worldName) {
@@ -100,9 +48,9 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param presetName
+	 * Flag preset does not exist
+	 * @param sender Command sender
+	 * @param presetName The preset that doesn't exist
 	 */
 	public void flagPresetDoesNotExist(CommandSender sender, String presetName) {
 		String message = CHAT_COLOR_ERROR + "Flag preset '" + presetName
@@ -112,8 +60,8 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
+	 * No permission
+	 * @param sender Command sender
 	 */
 	public void noPermission(CommandSender sender) {
 		String message = CHAT_COLOR_ERROR + "You don't have permission.";
@@ -121,10 +69,10 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param presetName
-	 * @param regionName
+	 * Flags applied to region
+	 * @param sender Command sender
+	 * @param presetName The preset
+	 * @param regionName The region
 	 */
 	public void flagsAppliedToRegion(CommandSender sender, String presetName,
 			String regionName) {
@@ -135,9 +83,9 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param flagName
+	 * Some flag could not be set
+	 * @param sender Command sender
+	 * @param flagName Flag that wasn't set
 	 */
 	public void flagNotSet(CommandSender sender, String flagName) {
 		String message = CHAT_COLOR_ERROR + "Could not set flag '" + flagName
@@ -147,9 +95,9 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param regionName
+	 * Flags cleared of region
+	 * @param sender Command sender
+	 * @param regionName The region
 	 */
 	public void flagsClearedOfRegion(CommandSender sender, String regionName) {
 		String message = CHAT_COLOR_MESSAGE + "All flags cleared of region '"
@@ -159,9 +107,9 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param page
+	 * Page number does not exist
+	 * @param sender Command sender
+	 * @param page Page number
 	 */
 	public void pageDoesNotExist(CommandSender sender, int page) {
 		String message = CHAT_COLOR_ERROR + "Page " + page + " does not exist.";
@@ -170,9 +118,9 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
-	 * @param worldName
+	 * World does not exist
+	 * @param sender Command sender
+	 * @param worldName World that doesn't exist
 	 */
 	public void worldDoesNotExist(CommandSender sender, String worldName) {
 		String message = CHAT_COLOR_ERROR + "World '" + worldName
@@ -181,41 +129,20 @@ public class Messages {
 	}
 
 	/**
-	 * 
-	 * @param sender
+	 * Configuration reloaded
+	 * @param sender Command sender
 	 */
 	public void reloadedConfiguration(CommandSender sender) {
 		String message = CHAT_COLOR_MESSAGE + "WorldGuardFlagger configuration reloaded.";
 		sender.sendMessage(message);
 	}
 
+	/**
+	 * Command is only for players
+	 * @param sender Command sender
+	 */
 	public void commandOnlyForPlayers(CommandSender sender) {
 		String message = "This command is only for in-game players.";
 		sender.sendMessage(message);
 	}
-
-	public void regionAlreadyExists(CommandSender sender, String regionName,
-			String worldName) {
-		String message = CHAT_COLOR_ERROR + "Region '" + regionName + 
-		"' already exists in world '" + worldName + "'.";
-		sender.sendMessage(message);
-	}
-
-	public void noSelection(CommandSender sender) {
-		String message = CHAT_COLOR_ERROR + "Select a region first, with WorldEdit's command //wand";
-		sender.sendMessage(message);
-	}
-
-	public void noWorldEdit(CommandSender sender, CommandException e) {
-		String message = CHAT_COLOR_ERROR + e.getMessage();
-		sender.sendMessage(message);
-		
-	}
-
-	public void couldNotExpandVert(CommandSender sender) {
-		String message = CHAT_COLOR_ERROR + "Could not expand region from top-to-bottom.";
-		sender.sendMessage(message);
-		
-	}
-
 }

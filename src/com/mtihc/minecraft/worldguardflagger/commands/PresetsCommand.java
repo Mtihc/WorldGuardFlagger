@@ -12,10 +12,22 @@ import com.mtihc.minecraft.worldguardflagger.Messages;
 import com.mtihc.minecraft.worldguardflagger.Permission;
 import com.mtihc.minecraft.worldguardflagger.WorldGuardFlagger;
 
+/**
+ * Command to show all presets that you're alloed to use
+ * 
+ * @author Mitch
+ *
+ */
 public class PresetsCommand extends BukkitCommand {
 
 	private WorldGuardFlagger plugin;
 
+	/**
+	 * Constructor
+	 * @param plugin The WorldGuardFlagger plugin
+	 * @param name The command's label
+	 * @param aliases The command's aliases
+	 */
 	public PresetsCommand(WorldGuardFlagger plugin, String name, List<String> aliases) {
 		super(name, "List all presets that you're allowed to use.", "[page]", aliases);
 		this.plugin = plugin;
@@ -111,10 +123,31 @@ public class PresetsCommand extends BukkitCommand {
 		return true;
 	}
 
+	/**
+	 * Returns whether the command sender has permission to use the specified preset.
+	 * @param sender Command sender
+	 * @param preset The preset
+	 * @return true if the sender has permission, false otherwise
+	 */
 	private boolean hasPermissionForPreset(CommandSender sender, String preset) {
 		return (hasChildPermission(Permission.SET.getNode(), sender, preset) || hasChildPermission(Permission.SET_MEMBER.getNode(), sender, preset) || hasChildPermission(Permission.SET_OWNER.getNode(), sender, preset));
 	}
 	
+	/**
+	 * Checks if a player has permission for the preset using some child permission.
+	 * 
+	 * <p>This is necessary because a preset name can be in the permission node. And 
+	 * these kinds of permissions are not defined in the plugin.yml file. So 
+	 * permission plugins will not pickup on them. 
+	 * We have to check ourselves, for .* permissions and such.</p>
+	 * 
+	 * <p>Used in method <code>hasPermissionPreset()</code>.</p>
+	 * 
+	 * @param node The permission node to check
+	 * @param sender Command sender
+	 * @param preset The preset name that could be included in the permission node
+	 * @return true if the player has permission, false otherwise
+	 */
 	private boolean hasChildPermission(String node, CommandSender sender, String preset) {
 		return sender.hasPermission(node) || sender.hasPermission(node + ".*") || sender.hasPermission(node + "." + preset);
 	}

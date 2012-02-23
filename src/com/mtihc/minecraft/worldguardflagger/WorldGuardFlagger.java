@@ -78,7 +78,7 @@ public class WorldGuardFlagger extends JavaPlugin {
 	public void onEnable() {
 		
 		if(!setupWorldGuard()) {
-			messages.severe("Plugin requires WorldGuard. WorldGuard was not found.");
+			getLogger().severe("Plugin requires WorldGuard. WorldGuard was not found.");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -87,7 +87,7 @@ public class WorldGuardFlagger extends JavaPlugin {
 		config = new ConfigYaml(this);
 		config.reload();
 		// create messages handler
-		messages = new Messages(this);
+		messages = new Messages();
 		
 		// create command handler
 		PluginCommand cmd = getCommand("flagger");
@@ -184,7 +184,7 @@ public class WorldGuardFlagger extends JavaPlugin {
 			Object bool = parseBoolean(valueString);
 			if(bool == null) {
 				// specified a value, other than allow/deny/true/false
-				messages.severe("Invalid state in config.yml at flag '"
+				getLogger().severe("Invalid state in config.yml at flag '"
 						+ flag.getName() + "' of preset '" + flagpreset
 						+ "'. State values: allow/deny");
 				messages.flagNotSet(sender, flag.getName());
@@ -204,7 +204,7 @@ public class WorldGuardFlagger extends JavaPlugin {
 			Object bool = parseBoolean(valueString);
 			if(bool == null) {
 				// could not convert string to true/false
-				messages.severe("Invalid boolean format in config.yml at flag '"
+				getLogger().severe("Invalid boolean format in config.yml at flag '"
 						+ flag.getName()
 						+ "' of preset '"
 						+ flagpreset
@@ -227,7 +227,7 @@ public class WorldGuardFlagger extends JavaPlugin {
 			try {
 				return flag.parseInput(worldGuard, sender, valueString);
 			} catch (InvalidFlagFormat e) {
-				messages.severe("Invalid flag format in config.yml at flag '"
+				getLogger().severe("Invalid flag format in config.yml at flag '"
 						+ flag.getName()
 						+ "' of preset '"
 						+ flagpreset
@@ -243,9 +243,12 @@ public class WorldGuardFlagger extends JavaPlugin {
 	 * 
 	 * <p>This method returns <code>true</code> if the string equals (ignoring case) any of these strings:</br>
 	 * <code>"allow", "true", "yes", "on"</code></p>
+	 * 
 	 * <p>This method returns <code>false</code> if the string equals (ignoring case) any of the strings:</br>
 	 * <code>"deny", "false", "no", "off"</code></p>
+	 * 
 	 * <p>Otherwise this method returns <code>null</code>.</p>
+	 * 
 	 * @param value The string to convert to boolean
 	 * @return The converted string. <code>true</code>, <code>false</code> or <code>null</code>
 	 */

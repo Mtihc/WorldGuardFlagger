@@ -16,10 +16,22 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+/**
+ * Command to apply a flag preset to a WorldGuard region.
+ * 
+ * @author Mitch
+ *
+ */
 public class SetCommand extends BukkitCommand {
 
 	private WorldGuardFlagger plugin;
 
+	/**
+	 * Constructor
+	 * @param plugin The WorldGuardFlagger plugin
+	 * @param name The command's label
+	 * @param aliases The command's aliases
+	 */
 	public SetCommand(WorldGuardFlagger plugin, String name, List<String> aliases) {
 		super(name, "Apply a flagpreset to a WorldGuard region", "<region> [world] <flagpreset>", aliases);
 		this.plugin = plugin;
@@ -135,6 +147,12 @@ public class SetCommand extends BukkitCommand {
 		return true;
 	}
 	
+	/**
+	 * Applies a preset to a region
+	 * @param sender Command sender
+	 * @param presetName preset name
+	 * @param region the protected region
+	 */
 	private void doSetFlags(CommandSender sender, String presetName, ProtectedRegion region) {
 		
 		HashMap<Flag<?>, Object> flags = new HashMap<Flag<?>, Object>();
@@ -160,6 +178,13 @@ public class SetCommand extends BukkitCommand {
 		return Permission.SET.getNode();
 	}
 	
+	/**
+	 * Returns whether the command sender has permission to apply the preset to the protected region.
+	 * @param sender Command sender
+	 * @param region the protected region
+	 * @param preset preset name
+	 * @return true if the player has permission, false otherwise
+	 */
 	public boolean hasPermission(CommandSender sender, ProtectedRegion region, String preset) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;

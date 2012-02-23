@@ -19,6 +19,12 @@ public class FlaggerCommand extends BukkitCommand {
 	private JavaPlugin plugin;
 
 
+	/**
+	 * Constructor
+	 * @param plugin WorldGuardFlagger plugin
+	 * @param name The name of this command
+	 * @param aliases The aliases for this command
+	 */
 	public FlaggerCommand(WorldGuardFlagger plugin, String name, List<String> aliases) {
 		super(name, "Reload config. To get help, type /" + name + " help", "", aliases);
 		
@@ -30,17 +36,22 @@ public class FlaggerCommand extends BukkitCommand {
 		longDescription.add("Reload the configuration file");
 		longDescription.add(ChatColor.GREEN + "Nested commands:");
 		
+		// set
 		BukkitCommand set = new SetCommand(plugin, "set", null);
 		addNested(set, server);
 		longDescription.add(set.getUsage());
 		
+		// clear
 		BukkitCommand clear = new ClearCommand(plugin, "clear", null);
 		addNested(clear, server);
 		longDescription.add(clear.getUsage());
+		
+		// flags
 		BukkitCommand flags = new FlagsCommand(plugin, "flags", null);
 		addNested(flags, server);
 		longDescription.add(flags.getUsage());
 		
+		// presets
 		BukkitCommand presets = new PresetsCommand(plugin, "presets", null);
 		addNested(presets, server);
 		longDescription.add(presets.getUsage());
@@ -48,12 +59,6 @@ public class FlaggerCommand extends BukkitCommand {
 		longDescription.add("/" + name + " <command> help");
 		
 		setLongDescription(longDescription);
-		
-		
-		
-		
-		
-		
 		
 	}
 	

@@ -23,10 +23,22 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.flags.VectorFlag;
 
+/**
+ * Command to show info about all of WorldGuard's flags, or all flags in a preset.
+ * 
+ * @author Mitch
+ *
+ */
 public class FlagsCommand extends BukkitCommand {
 
 	private WorldGuardFlagger plugin;
 
+	/**
+	 * Constructor
+	 * @param plugin The WorldGuardFlagger plugin
+	 * @param name The command's label
+	 * @param aliases The command's aliases
+	 */
 	public FlagsCommand(WorldGuardFlagger plugin, String name, List<String> aliases) {
 		super(name, "Show info about all of WorldGuard's flags, or all flags in a preset", "[page] | <flagpreset> [page]", aliases);
 		this.plugin = plugin;

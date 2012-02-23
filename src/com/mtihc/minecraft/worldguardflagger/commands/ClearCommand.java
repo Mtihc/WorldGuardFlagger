@@ -16,10 +16,22 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.Flag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+/**
+ * Command to clear all flags from a region
+ * 
+ * @author Mitch
+ *
+ */
 public class ClearCommand extends BukkitCommand {
 
 	private WorldGuardFlagger plugin;
 
+	/**
+	 * Constructor
+	 * @param plugin The WorldGuardFlagger plugin
+	 * @param name The command's label
+	 * @param aliases The command's aliases
+	 */
 	public ClearCommand(WorldGuardFlagger plugin, String name, List<String> aliases) {
 		super(name, "Clear all flags from a WorldGuard region", "<region> [world]", aliases);
 		this.plugin = plugin;
@@ -137,6 +149,12 @@ public class ClearCommand extends BukkitCommand {
 		return Permission.CLEAR.getNode();
 	}
 	
+	/**
+	 * Returns whether the command sender has permission to clear all flags of the specified region.
+	 * @param sender Command sender
+	 * @param region The region
+	 * @return true if the player permission, false otherwise
+	 */
 	public boolean hasPermission(CommandSender sender, ProtectedRegion region) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
